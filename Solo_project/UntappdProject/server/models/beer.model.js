@@ -6,15 +6,15 @@ const BeerSchema = new mongoose.Schema({
     },
     imageUrl: {
         type: String,
-        required: [true, "Image is required"]
+        required: [true, "Image is required"],
     },
     style: {
         type: String,
-        required: [true, "Style of beer is required"]
+        required: [true, "Style of beer is required"],
     },
     brewery: {
         type: String,
-        required: [true, "Brewery is required"]
+        required: [true, "Brewery name is required"],
     },
     description: {
         type: String,

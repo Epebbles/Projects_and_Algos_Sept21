@@ -7,13 +7,13 @@ const getAllBeers = ( req, res ) => {
 }
 
 const createBeer = (req, res) => {
-    const { name, style, brewrey, abv, hops } = req.body;
+    const { name, imageUrl, style, brewery, description} = req.body;
     Beer.create({
         name,
+        imageUrl,
         style,
-        brewrey,
-        abv,
-        hops,
+        brewery,
+        description,
     })
         .then((newBeer) => res.json(newBeer))
         .catch((err) => {
@@ -35,7 +35,7 @@ const editBeer = (req, res) => {
         { new: true, runValidators: true }
     )
         .then((editBeer) => res.json(editBeer))
-        .catch((err) => res,status(400).json({error: err}));
+        .catch((err) => res.status(400).json({error: err}));
 }
 
 const deleteBeer = (req, res) => {
