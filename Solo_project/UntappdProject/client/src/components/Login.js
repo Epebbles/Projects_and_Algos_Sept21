@@ -28,6 +28,12 @@ const Login = () => {
             setErrMsg(err.response.data.err)
         });
     };
+
+    const greenStyle = {
+        backgroundColor: "green",
+        color: "white",
+        width: "120px",
+    }
     
     return(
         <>
@@ -54,7 +60,7 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)} 
                     />
                 </div>
-                <button type="submit">Sign In</button>
+                <button type="submit" style={greenStyle}>Sign In</button>
 
             </form>
         </>

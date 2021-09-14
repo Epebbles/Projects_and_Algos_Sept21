@@ -18,13 +18,16 @@ const Details = (props) => {
         <>
             {beerInfo ? (
                 <div className="table">
-                    <h1>Untappd List</h1>
+                    <h1>Untappd Details</h1>
                     <p><Link to={"/beers"}>Home Page</Link></p>
                     <hr/>
                     <h3>Details about: {beerInfo.name}</h3>
-                    <img src={beerInfo.photoUrl} alt="" />
+                    
                     <table>
                         <thead>
+                            <th>
+                                <tr><img src={beerInfo.photoUrl} alt="" /></tr>
+                            </th>
                         </thead>
                         <tbody>
                             <tr>
@@ -32,7 +35,6 @@ const Details = (props) => {
                                 <tr>Brewery: {beerInfo.brewery}</tr>
                                 <tr>Description: {beerInfo.description}</tr>
                             </tr>
-                            <hr/>
                         </tbody>
                     </table>
                 </div>

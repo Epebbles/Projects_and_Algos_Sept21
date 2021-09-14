@@ -50,10 +50,14 @@ const Edit = (props) => {
                 setErrors(errorResponse);
             });
     }
+    const redStyle = {
+        backgroundColor: "red",
+        color: "white"
+    }
 
 
     return (
-        <div>
+        <div className="table">
             <h1>Edit {beer.name}</h1>
             {loaded && (
                 <BeerForm
@@ -63,9 +67,11 @@ const Edit = (props) => {
                     style={beer.style}
                     brewery={beer.brewery}
                     description={beer.description}
-                />
+                />      
             )}
-            <button onClick={()=>deleteBeer(beer._id)}>Delete {beer.name}?</button>
+            <div>
+                <button onClick={()=>deleteBeer(beer._id)} style={redStyle}>Delete {beer.name}?</button>
+            </div>
         </div>
     )
 }

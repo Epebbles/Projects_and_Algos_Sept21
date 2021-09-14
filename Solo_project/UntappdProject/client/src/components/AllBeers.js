@@ -33,8 +33,7 @@ const AllBeers = (props) => {
     return(
         <>
             <div className="table">
-            <h1> Untappd list</h1>
-
+            <h1> Untappd Beers</h1>
                 <table>
                     <thead>
                         <tr>
@@ -48,22 +47,18 @@ const AllBeers = (props) => {
                             return(
                                 <tr key={index}>
                                     <td><img src={beer.photoUrl} alt="" /></td>
-                                    <td>{beer.name}</td>
+                                    <td><Link to={"/beers/" + beer._id}>{beer.name}</Link></td>
                                     {/* <p><td>{beer.style}</td></p>
                                     <p><td>{beer.brewery}</td></p>
                                     <p><td>{beer.description}</td></p> */}
                                     <td>
-                                        <span><Link to={"/beers/" + beer._id + "/edit"}>Edit Beer?</Link>      |     </span>
-                                        <span><Link to={"/beers/" + beer._id}>Learn More?</Link></span> 
+                                        |   <span><Link to={"/beers/" + beer._id + "/edit"}>Edit Beer?</Link></span>   |
                                     </td>
                                 </tr>
                             )
                         })}
                     </tbody>
                 </table>
-            </div>
-            <div>
-                <button onClick={(e) => Logout()}>Logout</button>  
             </div>
         </>
     );

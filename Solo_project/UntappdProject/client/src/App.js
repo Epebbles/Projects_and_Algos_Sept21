@@ -9,14 +9,18 @@ import AllBeers from './components/AllBeers';
 import Details from './components/Details';
 import Edit from './components/Edit';
 import LoginReg from './views/LoginReg';
+import Header from './components/Header';
+import HomePage from './views/HomePage';
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <LoginReg default path="/loginreg" />
+        <LoginReg path="/loginreg" />
         <Register path="/register" />
         <Login path="/login" />
+        <Header path="/header" />
+        <HomePage default path="/beers" />
         <AllBeers path="/beers" />
         <AddBeer path="/beers/new" />
         <Details path="/beers/:beerId" />

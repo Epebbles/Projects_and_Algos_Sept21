@@ -19,7 +19,7 @@ const AddBeer = () => {
             });
     }
     return (
-        <div>
+        <div className="table">
             <h1>Add a new Beer!</h1>
             <BeerForm />
         </div>

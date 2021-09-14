@@ -8,13 +8,10 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [errs, setErrs] = useState("");
-    const [successMsg, setSuccessMsg] = useState("");
+    const [err, setErr] = useState("");
 
     const register = async (e) => {
         e.preventDefault();
-        setErrs("");
-        setSuccessMsg("");
         const postData = {
             firstName,
             lastName,
@@ -22,28 +19,29 @@ const Register = () => {
             password,
             confirmPassword,
         };
-        axios.post("http://localhost:8000/api/user/register", postData, {
-            withCredentials: true,
-        })
-        .then((response) => {
-            console.log(response.cookie);
-            console.log(response);
-            setSuccessMsg(response.data.message)
-            navigate("/loginreg");
-        })
-        .catch((err) => {
-            console.log(err);
+        try {
+            await axios.post("http://localhost:8000/api/user/register", postData, {
+                withCredentials: true,
+            });
+            // navigate("/loginreg");
+        } catch (err) {
+            // console.log("ERROR BLOCK")
+            // console.log(err);
             console.log(err.response.data);
-            setErrs(err.response.data.error);
-        });
+            const errorResponse = err.response.data.error;
+            setErr(errorResponse);
+        }
     };
+
+    const blueStyle = {
+        backgroundColor: "#0066b2",
+        color: "white",
+    }
+    
     return (
         <form onSubmit={register}>
             <h1>Register</h1>
-            {errs && <h3 style={{ color: "red" }}>{errs}</h3>}
-            {successMsg.length > 0 && (
-                <h3 style={{ color: "green" }}>{successMsg}</h3>
-            )}
+            {err && <h3 style={{ color: "red" }}>{err}</h3>}
             <div>
                 First Name:{" "}
                 <input type="text" onChange={(e) => setFirstName(e.target.value)} />
@@ -69,7 +67,7 @@ const Register = () => {
                 <input type="password" onChange={(e) => setConfirmPassword(e.target.value)} />
             </div>
 
-            <button type="submit">Submit</button>
+            <button type="submit" style={blueStyle}>Register</button>
         </form>
     );
 };

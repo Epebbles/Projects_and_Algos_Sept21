@@ -11,6 +11,7 @@ const BeerSchema = new mongoose.Schema({
     style: {
         type: String,
         required: [true, "Style of beer is required"],
+        enum: ["IPA", "Pale Ale", "Alt-style", "Lager", "Red Ale", "Porter", "Stout"],
     },
     brewery: {
         type: String,

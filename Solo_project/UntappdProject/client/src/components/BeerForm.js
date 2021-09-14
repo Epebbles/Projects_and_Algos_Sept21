@@ -24,7 +24,10 @@ const BeerForm = (props) => {
         const postData = {
             name, photoUrl, style, brewery, description
         }
-        axios.post('http://localhost:8000/api/beers', postData)
+        axios.post('http://localhost:8000/api/beers/', postData,
+            {
+                withCredentials: true,
+            })
             .then(newBeer => {
                 console.log(newBeer)
                 setName("");
@@ -36,16 +39,24 @@ const BeerForm = (props) => {
             })
             .catch((err) => {
                 console.log("ERROR BLOCK")
+                if(err.response.status === 401) {
+                    navigate('/login');
+                }
                 console.log(err.response.data.error)
                 const errorResponse = err.response.data.error;
                 setErrors(errorResponse);
             });
     }
+    const blueStyle = {
+        backgroundColor: "#0066b2",
+        color: "white",
+        width: "120px",
+    }
+
     return (
         <>
             <Link to={"/beers"}> Home Page</Link>
-            <hr />
-
+            <hr/>
             <form onSubmit={handleFormSubmit}>
                 <p>
                     <label htmlFor="name">Beer Name: </label>
@@ -79,7 +90,7 @@ const BeerForm = (props) => {
                     <input type="text" onChange={(e) => setDescription(e.target.value)} value={description}/><br/>
                 </p>
                 <hr/>
-                <button type="submit">Prost!</button>
+                <button type="submit" style={blueStyle}>Prost! To you!</button>
             </form>
             {errors ? Object.keys(errors).map((key, index) => (
                 <p key={index}>{errors[key].message}</p>

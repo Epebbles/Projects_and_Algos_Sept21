@@ -1,7 +1,7 @@
 const BeerController = require('../controllers/beer.controller');
-const { authenticate } = require('../middleware/jwt.middleware');
+const { authenticate } = require('../config/jwt.config');
 
-module.exports = function(app){
+module.exports = (app) => {
     app.get('/api/beers', BeerController.getAllBeers);
     app.post('/api/beers', authenticate, BeerController.createBeer);
     app.get('/api/beers/:beerId', BeerController.getOneBeer);
