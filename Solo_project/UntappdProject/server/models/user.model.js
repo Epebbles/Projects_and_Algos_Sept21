@@ -2,21 +2,24 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
-    name: {
+    firstName: {
         type: String,
-        required: [true,  "Name is required"],
+        required: [true,  "First Name is required"],
     },
 
-    username: {
+    lastName: {
         type: String,
-        required: [true, "You must make a Username"],
+        required: [true, "Last Name is required"],
     },
 
     email: {
         type: String,
         required: [true, "Email is required"],
+        validate: {
+            validator: (val) => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
+            message: "Please enter a valid email",
+        },
     },
-
     password: {
         type: String,
         required: [true, "You must enter a password"],
@@ -36,14 +39,12 @@ UserSchema.pre("validate", function(next) {
 });
 
 UserSchema.pre("save", function(next) {
-    bcrypt.hash(this.password, 12)
-        .then((hashedPassword) => {
-            this.password = hashedPassword;
+    bcrypt.hash(this.password, 10)
+        .then((hash) => {
+            this.password = hash;
             next();
         })
-        .catch((err) => {
-            console.log("Could not hash password")
-        });
+        .catch((err) => console.log(err));
 });
 
 const User = mongoose.model('User', UserSchema);

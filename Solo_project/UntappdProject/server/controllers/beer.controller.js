@@ -7,10 +7,10 @@ const getAllBeers = ( req, res ) => {
 }
 
 const createBeer = (req, res) => {
-    const { name, imageUrl, style, brewery, description} = req.body;
+    const { name, photoUrl, style, brewery, description} = req.body;
     Beer.create({
         name,
-        imageUrl,
+        photoUrl,
         style,
         brewery,
         description,

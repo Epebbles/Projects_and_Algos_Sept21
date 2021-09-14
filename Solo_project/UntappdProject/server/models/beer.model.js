@@ -4,7 +4,7 @@ const BeerSchema = new mongoose.Schema({
         type: String,
         required: [true, "Name of beer is required"],
     },
-    imageUrl: {
+    photoUrl: {
         type: String,
         required: [true, "Image is required"],
     },
